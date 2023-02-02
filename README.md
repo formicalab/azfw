@@ -1,1 +1,1 @@
-# useful things for Azure Firewall
+Useful things for Azure Firewall
