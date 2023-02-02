@@ -1,1 +1,1 @@
-# azfw
+# useful things for Azure Firewall
