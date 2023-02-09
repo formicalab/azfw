@@ -5,6 +5,9 @@
       "type": 9,
       "content": {
         "version": "KqlParameterItem/1.0",
+        "crossComponentResources": [
+          "{Subscription}"
+        ],
         "parameters": [
           {
             "id": "4ef6f90b-5200-4e9f-8557-3b10a0af8b57",
@@ -12,19 +15,14 @@
             "name": "Subscription",
             "type": 6,
             "isRequired": true,
-            "multiSelect": true,
-            "quote": "'",
-            "delimiter": ",",
             "typeSettings": {
-              "additionalResourceOptions": [
-                "value::all"
-              ],
-              "includeAll": false,
-              "showDefault": false
+              "additionalResourceOptions": [],
+              "includeAll": false
             },
             "timeContext": {
               "durationMs": 86400000
-            }
+            },
+            "value": "/subscriptions/e652c234-847d-4880-886c-eddac0f3b06f"
           },
           {
             "id": "ab58fd32-1088-441e-999b-c9783722cf91",
@@ -146,7 +144,7 @@
           }
         ],
         "style": "pills",
-        "queryType": 0,
+        "queryType": 1,
         "resourceType": "microsoft.resourcegraph/resources"
       },
       "name": "parameters - 0"
@@ -166,7 +164,7 @@
         ],
         "timeContextFromParameter": "TimeRange",
         "timeContext": {
-          "durationMs": 14400000
+          "durationMs": 0
         },
         "metrics": [
           {
@@ -185,7 +183,48 @@
       },
       "customWidth": "50",
       "showPin": true,
-      "name": "metric - 2"
+      "name": "metric - 2",
+      "styleSettings": {
+        "showBorder": true
+      }
+    },
+    {
+      "type": 10,
+      "content": {
+        "chartId": "workbookb78b4530-5187-4d5d-bec9-36722ba693f0",
+        "version": "MetricsItem/2.0",
+        "size": 1,
+        "chartType": 2,
+        "resourceType": "microsoft.network/azurefirewalls",
+        "metricScope": 0,
+        "resourceParameter": "Firewalls",
+        "resourceIds": [
+          "{Firewalls}"
+        ],
+        "timeContext": {
+          "durationMs": 3600000
+        },
+        "metrics": [
+          {
+            "namespace": "microsoft.network/azurefirewalls",
+            "metric": "microsoft.network/azurefirewalls--ApplicationRuleHit",
+            "aggregation": 1,
+            "splitBy": null
+          }
+        ],
+        "title": "Application rule hit count",
+        "showOpenInMe": true,
+        "showCreateAlertRule": true,
+        "gridSettings": {
+          "rowLimit": 10000
+        }
+      },
+      "customWidth": "50",
+      "showPin": true,
+      "name": "metric - 4",
+      "styleSettings": {
+        "showBorder": true
+      }
     },
     {
       "type": 10,
@@ -202,7 +241,7 @@
         ],
         "timeContextFromParameter": "TimeRange",
         "timeContext": {
-          "durationMs": 14400000
+          "durationMs": 0
         },
         "metrics": [
           {
@@ -219,9 +258,11 @@
           "rowLimit": 10000
         }
       },
-      "customWidth": "50",
       "showPin": true,
-      "name": "metric - 3"
+      "name": "metric - 3",
+      "styleSettings": {
+        "showBorder": true
+      }
     },
     {
       "type": 3,
