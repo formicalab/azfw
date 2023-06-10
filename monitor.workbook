@@ -2,90 +2,73 @@
   "version": "Notebook/1.0",
   "items": [
     {
+      "type": 1,
+      "content": {
+        "json": "# Azure Firewall Workbook\r\n---\r\n"
+      },
+      "name": "text - 23"
+    },
+    {
+      "type": 11,
+      "content": {
+        "version": "LinkItem/1.0",
+        "style": "tabs",
+        "links": [
+          {
+            "id": "20847ce8-91bc-4d8b-b878-a5a41c95c31c",
+            "cellValue": "selectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Azure Firewall Overview",
+            "subTarget": "AFOverview",
+            "preText": "Azure Firewall Overview",
+            "style": "link"
+          },
+          {
+            "id": "51bac80d-31ba-4e42-ad66-e4ccfd6ce32e",
+            "cellValue": "selectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Azure Firewall - DNAT Rule Logs",
+            "subTarget": "AFDNatRuleLogs",
+            "style": "link"
+          },
+          {
+            "id": "1f6661e2-f873-4d56-879d-4d085d8cf1d4",
+            "cellValue": "selectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Azure Firewall - Network Rule Logs",
+            "subTarget": "AFNetworkRuleLogs",
+            "style": "link"
+          },
+          {
+            "id": "f564709d-1658-46a1-8b44-892210e13017",
+            "cellValue": "selectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Azure Firewall - Application Rule Logs",
+            "subTarget": "AFApplicationRuleLogs",
+            "style": "link"
+          }
+        ]
+      },
+      "name": "links - 24"
+    },
+    {
       "type": 9,
       "content": {
         "version": "KqlParameterItem/1.0",
         "crossComponentResources": [
-          "{Subscription}"
+          "value::selected"
         ],
         "parameters": [
           {
-            "id": "4ef6f90b-5200-4e9f-8557-3b10a0af8b57",
-            "version": "KqlParameterItem/1.0",
-            "name": "Subscription",
-            "type": 6,
-            "isRequired": true,
-            "typeSettings": {
-              "additionalResourceOptions": [],
-              "includeAll": false
-            },
-            "timeContext": {
-              "durationMs": 86400000
-            },
-            "value": "/subscriptions/e652c234-847d-4880-886c-eddac0f3b06f"
-          },
-          {
-            "id": "ab58fd32-1088-441e-999b-c9783722cf91",
-            "version": "KqlParameterItem/1.0",
-            "name": "Workspaces",
-            "type": 5,
-            "isRequired": true,
-            "multiSelect": true,
-            "quote": "'",
-            "delimiter": ",",
-            "query": "where type =~ 'microsoft.operationalinsights/workspaces'\r\n| project id, name\r\n| order by name desc",
-            "crossComponentResources": [
-              "{Subscription}"
-            ],
-            "typeSettings": {
-              "additionalResourceOptions": [
-                "value::all"
-              ],
-              "showDefault": false
-            },
-            "timeContext": {
-              "durationMs": 86400000
-            },
-            "queryType": 1,
-            "resourceType": "microsoft.resourcegraph/resources",
-            "value": [
-              "value::all"
-            ]
-          },
-          {
-            "id": "d04f71d8-0fd6-481d-9fce-c34e2920c102",
-            "version": "KqlParameterItem/1.0",
-            "name": "Firewalls",
-            "type": 5,
-            "isRequired": true,
-            "multiSelect": true,
-            "quote": "'",
-            "delimiter": ",",
-            "query": "where type =~ 'Microsoft.Network/azureFirewalls'\r\n| project id, name",
-            "crossComponentResources": [
-              "{Subscription}"
-            ],
-            "typeSettings": {
-              "additionalResourceOptions": [
-                "value::all"
-              ],
-              "showDefault": false
-            },
-            "timeContext": {
-              "durationMs": 86400000
-            },
-            "queryType": 1,
-            "resourceType": "microsoft.resourcegraph/resources",
-            "value": [
-              "value::all"
-            ]
-          },
-          {
-            "id": "dd6864cf-0e51-46b9-9849-78a5bee1f779",
+            "id": "ab7d6c51-d7df-436c-96a2-429163aa50ec",
             "version": "KqlParameterItem/1.0",
             "name": "TimeRange",
             "type": 4,
             "isRequired": true,
+            "isGlobal": true,
+            "value": {
+              "durationMs": 86400000
+            },
             "typeSettings": {
               "selectableValues": [
                 {
@@ -133,34 +116,400 @@
                 {
                   "durationMs": 7776000000
                 }
+              ],
+              "allowCustom": false
+            }
+          },
+          {
+            "id": "add90eb3-ff5f-4b19-9658-ff15c8043af5",
+            "version": "KqlParameterItem/1.0",
+            "name": "Workspaces",
+            "type": 5,
+            "isRequired": true,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "query": "where type =~ 'microsoft.operationalinsights/workspaces'\r\n| project id, name\r\n| order by name desc",
+            "crossComponentResources": [
+              "value::selected"
+            ],
+            "typeSettings": {
+              "additionalResourceOptions": [
+                "value::all"
+              ],
+              "showDefault": false
+            },
+            "queryType": 1,
+            "resourceType": "microsoft.resourcegraph/resources",
+            "value": [
+              "/subscriptions/e652c234-847d-4880-886c-eddac0f3b06f/resourceGroups/rg-hub-weu-001/providers/Microsoft.OperationalInsights/workspaces/log-hub-weu-001"
+            ]
+          },
+          {
+            "id": "5084e141-6c56-4d7f-bd8a-09f7ef9af1bc",
+            "version": "KqlParameterItem/1.0",
+            "name": "Resource",
+            "label": "Azure Firewalls",
+            "type": 5,
+            "isRequired": true,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "query": "where type =~ 'Microsoft.Network/azureFirewalls'\r\n| project id, name",
+            "crossComponentResources": [
+              "value::selected"
+            ],
+            "value": [
+              "value::all"
+            ],
+            "typeSettings": {
+              "additionalResourceOptions": [
+                "value::all"
               ]
             },
-            "timeContext": {
-              "durationMs": 86400000
+            "queryType": 1,
+            "resourceType": "microsoft.resourcegraph/resources"
+          },
+          {
+            "id": "68f2cb32-03d4-4307-8eb5-1f66dfc09a85",
+            "version": "KqlParameterItem/1.0",
+            "name": "FirewallResources",
+            "label": "Show Resources",
+            "type": 2,
+            "description": "The is only used on the Overview page.",
+            "typeSettings": {
+              "additionalResourceOptions": [],
+              "showDefault": false
             },
-            "value": {
-              "durationMs": 14400000
-            }
+            "jsonData": "[\r\n { \"value\": \"Yes\", \"label\": \"Yes\", \"selected\":true},\r\n {\"value\": \"No\", \"label\": \"No\" }\r\n]",
+            "value": "No"
+          },
+          {
+            "id": "53aa8daf-29de-40a1-9147-c0970e32fac4",
+            "version": "KqlParameterItem/1.0",
+            "name": "GeoLocation",
+            "label": "GeoLocationCSV",
+            "type": 2,
+            "description": "Supplied as a value for GeoLocation lookup on queries: Read more here - https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/ipv4-lookup-plugin#ipv4-lookup---matching-rows-only",
+            "typeSettings": {
+              "additionalResourceOptions": [],
+              "showDefault": false
+            },
+            "jsonData": "\r\n[\r\n{\r\n\"value\": \"https://raw.githubusercontent.com/datasets/geoip2-ipv4/master/data/geoip2-ipv4.csv\", \"label\": \"GeoLocationDefault\", \"selected\": \"true\"  \r\n}\r\n]\r\n\r\n"
           }
         ],
         "style": "pills",
         "queryType": 1,
         "resourceType": "microsoft.resourcegraph/resources"
       },
-      "name": "parameters - 0"
+      "name": "parameters - 1"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Azure Firewall - overview"
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFOverview"
+      },
+      "name": "Main title"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "resources\r\n| where type =~ 'Microsoft.Network/azureFirewalls'\r\n| extend Tier = trim(' ', tostring(properties.sku.tier))\r\n| extend Status = trim(' ', tostring(iif(isempty(properties.ipConfigurations.[0].properties.provisioningState), properties.provisioningState, properties.ipConfigurations.[0].properties.provisioningState)))\r\n| extend Premium = iff(Tier == \"Premium\", \"Yes\", \"No\")\r\n| extend Standard = iff(Tier == \"Standard\", \"Yes\", \"No\")\r\n| extend ProvisionedState = iff(Status == \"Succeeded\", \"Running\", \"Not Running\")\r\n| extend Allocated = iff(isempty(properties.ipConfigurations[0]), \"No\", \"Yes\")\r\n| extend Policy = trim(' ', tostring(properties.firewallPolicy.id))\r\n| project Firewall=id, Premium, Standard, ProvisionedState, Allocated, FirewallPolicy=Policy, location, resourceGroup, Subscription = subscriptionId\r\n",
+        "size": 4,
+        "title": "Azure Firewall Resource List",
+        "queryType": 1,
+        "resourceType": "microsoft.resourcegraph/resources",
+        "crossComponentResources": [
+          "value::selected"
+        ],
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "Premium",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "colors",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Yes",
+                    "representation": "green",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "No",
+                    "representation": "grayBlue",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": null,
+                    "text": "{0}{1}"
+                  }
+                ]
+              }
+            },
+            {
+              "columnMatch": "Standard",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "colors",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Yes",
+                    "representation": "green",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "No",
+                    "representation": "grayBlue",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": null,
+                    "text": "{0}{1}"
+                  }
+                ]
+              }
+            },
+            {
+              "columnMatch": "ProvisionedState",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "colors",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Running",
+                    "representation": "green",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Not Running",
+                    "representation": "grayBlue",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "text": "{0}{1}"
+                  }
+                ]
+              }
+            },
+            {
+              "columnMatch": "Allocated",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "icons",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Yes",
+                    "representation": "success",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "No",
+                    "representation": "disabled",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": null,
+                    "text": "{0}{1}"
+                  }
+                ]
+              }
+            },
+            {
+              "columnMatch": "Subscription",
+              "formatter": 15,
+              "formatOptions": {
+                "linkTarget": null,
+                "showIcon": true
+              }
+            },
+            {
+              "columnMatch": "subscriptionId",
+              "formatter": 15,
+              "formatOptions": {
+                "linkTarget": null,
+                "showIcon": true
+              }
+            },
+            {
+              "columnMatch": "ApplicationRuleClassic",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "colors",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "N/A",
+                    "representation": "gray",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": "green",
+                    "text": "{0}{1}"
+                  }
+                ]
+              }
+            },
+            {
+              "columnMatch": "NetworkRuleClassic",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "colors",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "N/A",
+                    "representation": "gray",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": "green",
+                    "text": "{0}{1}"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "FirewallResources",
+        "comparison": "isEqualTo",
+        "value": "Yes"
+      },
+      "name": "query - 60",
+      "styleSettings": {
+        "margin": "0"
+      }
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "### Firewall Metrics\r\nThe data below dosen't read from the Log Analytics workpsace, it's reading directly from the resources which requires resource visibility. \r\nClick [here for more information on Azure Metrics](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-platform-metrics)\r\n",
+        "style": "info"
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFOverview"
+      },
+      "name": "text - 39"
     },
     {
       "type": 10,
       "content": {
-        "chartId": "workbook36ea5c4b-46e9-4bee-9abd-83d6d409b2f9",
+        "chartId": "workbook76864ed5-dd34-42d0-ae35-f3db9f9e8f15",
         "version": "MetricsItem/2.0",
-        "size": 1,
+        "size": 0,
         "chartType": 2,
         "resourceType": "microsoft.network/azurefirewalls",
         "metricScope": 0,
-        "resourceParameter": "Firewalls",
+        "resourceParameter": "Resource",
         "resourceIds": [
-          "{Firewalls}"
+          "{Resource}"
+        ],
+        "timeContextFromParameter": "TimeRange",
+        "timeContext": {
+          "durationMs": 0
+        },
+        "metrics": [
+          {
+            "namespace": "microsoft.network/azurefirewalls",
+            "metric": "microsoft.network/azurefirewalls--Throughput",
+            "aggregation": 4,
+            "splitBy": null,
+            "columnName": "All Firewall Throughput Average"
+          }
+        ],
+        "title": "Average Throughput of Firewall Traffic",
+        "gridSettings": {
+          "rowLimit": 10000
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFOverview"
+      },
+      "customWidth": "25",
+      "name": "metric - 25"
+    },
+    {
+      "type": 10,
+      "content": {
+        "chartId": "workbook76864ed5-dd34-42d0-ae35-f3db9f9e8f15",
+        "version": "MetricsItem/2.0",
+        "size": 0,
+        "chartType": 2,
+        "resourceType": "microsoft.network/azurefirewalls",
+        "metricScope": 0,
+        "resourceParameter": "Resource",
+        "resourceIds": [
+          "{Resource}"
+        ],
+        "timeContextFromParameter": "TimeRange",
+        "timeContext": {
+          "durationMs": 0
+        },
+        "metrics": [
+          {
+            "namespace": "microsoft.network/azurefirewalls",
+            "metric": "microsoft.network/azurefirewalls--ApplicationRuleHit",
+            "aggregation": 1,
+            "splitBy": null
+          }
+        ],
+        "title": "Application Rule Hitcount (SUM)",
+        "gridSettings": {
+          "rowLimit": 10000
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFOverview"
+      },
+      "customWidth": "25",
+      "name": "metric - 25 - Copy - Copy - Copy"
+    },
+    {
+      "type": 10,
+      "content": {
+        "chartId": "workbook76864ed5-dd34-42d0-ae35-f3db9f9e8f15",
+        "version": "MetricsItem/2.0",
+        "size": 0,
+        "chartType": 2,
+        "resourceType": "microsoft.network/azurefirewalls",
+        "metricScope": 0,
+        "resourceParameter": "Resource",
+        "resourceIds": [
+          "{Resource}"
         ],
         "timeContextFromParameter": "TimeRange",
         "timeContext": {
@@ -174,70 +523,31 @@
             "splitBy": null
           }
         ],
-        "title": "Network rules hit count",
-        "showOpenInMe": true,
-        "showCreateAlertRule": true,
+        "title": "Network Rule Hitcount (SUM)",
         "gridSettings": {
           "rowLimit": 10000
         }
       },
-      "customWidth": "50",
-      "showPin": true,
-      "name": "metric - 2",
-      "styleSettings": {
-        "showBorder": true
-      }
-    },
-    {
-      "type": 10,
-      "content": {
-        "chartId": "workbookb78b4530-5187-4d5d-bec9-36722ba693f0",
-        "version": "MetricsItem/2.0",
-        "size": 1,
-        "chartType": 2,
-        "resourceType": "microsoft.network/azurefirewalls",
-        "metricScope": 0,
-        "resourceParameter": "Firewalls",
-        "resourceIds": [
-          "{Firewalls}"
-        ],
-        "timeContext": {
-          "durationMs": 3600000
-        },
-        "metrics": [
-          {
-            "namespace": "microsoft.network/azurefirewalls",
-            "metric": "microsoft.network/azurefirewalls--ApplicationRuleHit",
-            "aggregation": 1,
-            "splitBy": null
-          }
-        ],
-        "title": "Application rule hit count",
-        "showOpenInMe": true,
-        "showCreateAlertRule": true,
-        "gridSettings": {
-          "rowLimit": 10000
-        }
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFOverview"
       },
-      "customWidth": "50",
-      "showPin": true,
-      "name": "metric - 4",
-      "styleSettings": {
-        "showBorder": true
-      }
+      "customWidth": "25",
+      "name": "metric - 25 - Copy - Copy"
     },
     {
       "type": 10,
       "content": {
-        "chartId": "workbook09117e79-9a5c-452e-92a6-a7948bf7570f",
+        "chartId": "workbook76864ed5-dd34-42d0-ae35-f3db9f9e8f15",
         "version": "MetricsItem/2.0",
-        "size": 1,
+        "size": 0,
         "chartType": 2,
         "resourceType": "microsoft.network/azurefirewalls",
         "metricScope": 0,
-        "resourceParameter": "Firewalls",
+        "resourceParameter": "Resource",
         "resourceIds": [
-          "{Firewalls}"
+          "{Resource}"
         ],
         "timeContextFromParameter": "TimeRange",
         "timeContext": {
@@ -246,31 +556,359 @@
         "metrics": [
           {
             "namespace": "microsoft.network/azurefirewalls",
-            "metric": "microsoft.network/azurefirewalls--Throughput",
+            "metric": "microsoft.network/azurefirewalls--SNATPortUtilization",
             "aggregation": 4,
             "splitBy": null
           }
         ],
-        "title": "Throughput",
-        "showOpenInMe": true,
-        "showCreateAlertRule": true,
+        "title": "SNAT Port Utilization",
         "gridSettings": {
           "rowLimit": 10000
         }
       },
-      "showPin": true,
-      "name": "metric - 3",
-      "styleSettings": {
-        "showBorder": true
-      }
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFOverview"
+      },
+      "customWidth": "25",
+      "name": "metric - 25 - Copy"
     },
     {
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "// Azure Firewall log data \r\n// Start from this query if you want to parse the logs from network rules, application rules, NAT rules, IDS, threat intelligence and more to understand why certain traffic was allowed or denied. This query will show the last 100 log records but by adding simple filter statements at the end of the query the results can be tweaked. \r\n// Parses the azure firewall rule log data. \r\n// Includes network rules, application rules, threat intelligence, ips/ids, ...\r\nAzureDiagnostics\r\n| where Category == \"AzureFirewallNetworkRule\" or Category == \"AzureFirewallApplicationRule\"\r\n//optionally apply filters to only look at a certain type of log data\r\n//| where OperationName == \"AzureFirewallNetworkRuleLog\"\r\n//| where OperationName == \"AzureFirewallNatRuleLog\"\r\n//| where OperationName == \"AzureFirewallApplicationRuleLog\"\r\n//| where OperationName == \"AzureFirewallIDSLog\"\r\n//| where OperationName == \"AzureFirewallThreatIntelLog\"\r\n| extend msg_original = msg_s\r\n// normalize data so it's eassier to parse later\r\n| extend msg_s = replace(@'. Action: Deny. Reason: SNI TLS extension was missing.', @' to no_data:no_data. Action: Deny. Rule Collection: default behavior. Rule: SNI TLS extension missing', msg_s)\r\n| extend msg_s = replace(@'No rule matched. Proceeding with default action', @'Rule Collection: default behavior. Rule: no rule matched', msg_s)\r\n// extract web category, then remove it from further parsing\r\n| parse msg_s with * \" Web Category: \" WebCategory\r\n| extend msg_s = replace(@'(. Web Category:).*','', msg_s)\r\n// extract RuleCollection and Rule information, then remove it from further parsing\r\n| parse msg_s with * \". Rule Collection: \" RuleCollection \". Rule: \" Rule\r\n| extend msg_s = replace(@'(. Rule Collection:).*','', msg_s)\r\n// extract Rule Collection Group information, then remove it from further parsing\r\n| parse msg_s with * \". Rule Collection Group: \" RuleCollectionGroup\r\n| extend msg_s = replace(@'(. Rule Collection Group:).*','', msg_s)\r\n// extract Policy information, then remove it from further parsing\r\n| parse msg_s with * \". Policy: \" Policy\r\n| extend msg_s = replace(@'(. Policy:).*','', msg_s)\r\n// extract IDS fields, for now it's always add the end, then remove it from further parsing\r\n| parse msg_s with * \". Signature: \" IDSSignatureIDInt \". IDS: \" IDSSignatureDescription \". Priority: \" IDSPriorityInt \". Classification: \" IDSClassification\r\n| extend msg_s = replace(@'(. Signature:).*','', msg_s)\r\n// extra NAT info, then remove it from further parsing\r\n| parse msg_s with * \" was DNAT'ed to \" NatDestination\r\n| extend msg_s = replace(@\"( was DNAT'ed to ).*\",\". Action: DNAT\", msg_s)\r\n// extract Threat Intellingence info, then remove it from further parsing\r\n| parse msg_s with * \". ThreatIntel: \" ThreatIntel\r\n| extend msg_s = replace(@'(. ThreatIntel:).*','', msg_s)\r\n// extract URL, then remove it from further parsing\r\n| extend URL = extract(@\"(Url: )(.*)(\\. Action)\",2,msg_s)\r\n| extend msg_s=replace(@\"(Url: .*)(Action)\",@\"\\2\",msg_s)\r\n// parse remaining \"simple\" fields\r\n| parse msg_s with Protocol \" request from \" SourceIP \" to \" Target \". Action: \" Action\r\n| extend \r\n    SourceIP = iif(SourceIP contains \":\",strcat_array(split(SourceIP,\":\",0),\"\"),SourceIP),\r\n    SourcePort = iif(SourceIP contains \":\",strcat_array(split(SourceIP,\":\",1),\"\"),\"\"),\r\n    Target = iif(Target contains \":\",strcat_array(split(Target,\":\",0),\"\"),Target),\r\n    TargetPort = iif(SourceIP contains \":\",strcat_array(split(Target,\":\",1),\"\"),\"\"),\r\n    Action = iif(Action contains \".\",strcat_array(split(Action,\".\",0),\"\"),Action),\r\n    Policy = case(RuleCollection contains \":\", split(RuleCollection, \":\")[0] ,Policy),\r\n    RuleCollectionGroup = case(RuleCollection contains \":\", split(RuleCollection, \":\")[1], RuleCollectionGroup),\r\n    RuleCollection = case(RuleCollection contains \":\", split(RuleCollection, \":\")[2], RuleCollection),\r\n    IDSSignatureID = tostring(IDSSignatureIDInt),\r\n    IDSPriority = tostring(IDSPriorityInt)\r\n| project ResourceId, TimeGenerated,Protocol,SourceIP,SourcePort,Target,TargetPort,URL,Action, NatDestination, OperationName,ThreatIntel,IDSSignatureID,IDSSignatureDescription,IDSPriority,IDSClassification,Policy,RuleCollectionGroup,RuleCollection,Rule,WebCategory, msg_original\r\n| order by TimeGenerated",
-        "size": 2,
+        "query": "AZFWNetworkRule\r\n| union AZFWApplicationRule, AZFWNatRule, AZFWThreatIntel, AZFWIdpsSignature, AZFWDnsQuery\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| summarize Volume=count() by bin(TimeGenerated, {TimeRange:grain})\r\n",
+        "size": 0,
+        "title": "Events, by time: Query Time({$queryTime})",
+        "noDataMessage": "There are no firewall events being feed within the selected workspaces. If you believe the selection is correct, confirm logging has been enabled for the Azure Firewall and feeding into the selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 4,
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "visualization": "timechart"
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFOverview"
+      },
+      "customWidth": "25",
+      "name": "query - 16"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWNetworkRule\r\n| union AZFWApplicationRule, AZFWNatRule, AZFWThreatIntel, AZFWIdpsSignature, AZFWDnsQuery\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| summarize Volume=count() by Resource, bin(TimeGenerated, {TimeRange:grain})\r\n",
+        "size": 0,
+        "title": "Events, by firewall over time: Query Time({$queryTime})",
+        "noDataMessage": "There are no firewall events being feed within the selected workspaces. If you believe the selection is correct, confirm logging has been enabled for the Azure Firewall and feeding into the selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 4,
+        "timeContextFromParameter": "TimeRange",
+        "exportParameterName": "TopEvent",
+        "exportDefaultValue": "{\"Resource\":\"*\",\"ResourceGroup\":\"*\"}",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "visualization": "linechart",
+        "tileSettings": {
+          "titleContent": {
+            "columnMatch": "Resource",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "amount",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          },
+          "showBorder": true
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFOverview"
+      },
+      "customWidth": "25",
+      "name": "Firewall per Resource Group"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWNetworkRule\r\n| union AZFWApplicationRule, AZFWNatRule, AZFWThreatIntel, AZFWIdpsSignature, AZFWDnsQuery\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| summarize Volume=count() by Type\r\n| project Category=Type, Volume\r\n| sort by Volume desc",
+        "size": 0,
+        "title": "Events, by category: Query Time({$queryTime})",
+        "noDataMessage": "There are no firewall events being feed within the selected workspaces. If you believe the selection is correct, confirm logging has been enabled for the Azure Firewall and feeding into the selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 4,
+        "timeContextFromParameter": "TimeRange",
+        "exportFieldName": "Category",
+        "exportParameterName": "SelectedCategory",
+        "exportDefaultValue": "*",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "visualization": "piechart",
+        "tileSettings": {
+          "showBorder": false,
+          "titleContent": {
+            "columnMatch": "Category",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "Volume",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFOverview"
+      },
+      "customWidth": "25",
+      "name": "Events by category"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWNetworkRule\r\n| union AZFWApplicationRule, AZFWNatRule, AZFWThreatIntel, AZFWIdpsSignature, AZFWDnsQuery\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| summarize Volume=count() by Type, bin(TimeGenerated, {TimeRange:grain})\r\n| project Category=Type, Volume, TimeGenerated\r\n| sort by Volume desc",
+        "size": 0,
+        "title": "Events categories, by time: Query Time({$queryTime})",
+        "noDataMessage": "There are no firewall events being feed within the selected workspaces. If you believe the selection is correct, confirm logging has been enabled for the Azure Firewall and feeding into the selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 4,
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "visualization": "timechart"
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFOverview"
+      },
+      "customWidth": "25",
+      "name": "Events categories by time"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Azure Firewall - DNAT rule logs"
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFDNatRuleLogs"
+      },
+      "name": "AFDNatRuleLogs"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "//reference list posted here : https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/ipv4-lookup-plugin\r\nlet geoData = externaldata\r\n(network:string,geoname_id:string,continent_code:string,continent_name:string,\r\ncountry_iso_code:string,country_name:string,is_anonymous_proxy:string,is_satellite_provider:string)\r\n[@\"{GeoLocation}\"] with (ignoreFirstRecord=true, format=\"csv\");\r\nAZFWNatRule\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n//| project SourceIp\r\n| evaluate ipv4_lookup (geoData, SourceIp,  network, true)\r\n//| summarize count() by country_name\r\n| project TimeGenerated, _ResourceId, SourceIp, network, continent_name, country_name, is_anonymous_proxy, SourcePort, DestinationIp, DestinationPort, Protocol, TranslatedIp, TranslatedPort, Policy, RuleCollectionGroup, RuleCollection, Rule\r\n| order by TimeGenerated desc\r\n",
+        "size": 0,
         "showAnalytics": true,
+        "title": "DNAT rule events: Query Time({$queryTime}) : Total Rows({$rowCount})",
+        "noDataMessage": "There are no DNAT Rule events within the selected workspaces and for the selected firewalls. If you believe the selection is correct, confirm DNAT Rule logs are enabled for the Azure Firewall and feeding into this selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 2,
+        "timeContextFromParameter": "TimeRange",
+        "showRefreshButton": true,
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "gridSettings": {
+          "rowLimit": 2000,
+          "filter": true
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFDNatRuleLogs"
+      },
+      "name": "AFDNatRuleLogs"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Azure Firewall - Network rule logs"
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFNetworkRuleLogs"
+      },
+      "name": "AFDNetworkRuleLogs"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "//reference list posted here : https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/ipv4-lookup-plugin\r\nlet geoData = externaldata\r\n(network:string,geoname_id:string,continent_code:string,continent_name:string,\r\ncountry_iso_code:string,country_name:string,is_anonymous_proxy:string,is_satellite_provider:string)\r\n[@\"{GeoLocation}\"] with (ignoreFirstRecord=true, format=\"csv\");\r\nAZFWNetworkRule\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| where Action == \"Allow\"\r\n| evaluate ipv4_lookup (geoData, SourceIp,  network, true)\r\n| summarize  count (), last_log = datetime_diff(\"second\", now(), max(TimeGenerated)) by SourceIp, country_name\r\n| sort by count_ desc\r\n\r\n",
+        "size": 0,
+        "showAnalytics": true,
+        "title": "Allowed by source IP: Query time({$queryTime}), total rows({$rowCount})",
+        "noDataMessage": "There are no Network Rule logs within the selected workspaces and for the selected firewalls. If you believe the selection is correct, confirm Application Rule logs are enabled for the Azure Firewall and feeding into this selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 2,
+        "timeContextFromParameter": "TimeRange",
+        "showRefreshButton": true,
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "count_",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "blueGreen"
+              },
+              "numberFormat": {
+                "unit": 17,
+                "options": {
+                  "style": "decimal",
+                  "useGrouping": false,
+                  "maximumSignificantDigits": 4
+                }
+              }
+            },
+            {
+              "columnMatch": "last_log",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "blackWhite"
+              },
+              "numberFormat": {
+                "unit": 24,
+                "options": {
+                  "style": "decimal"
+                }
+              }
+            }
+          ],
+          "rowLimit": 2000
+        },
+        "sortBy": []
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFNetworkRuleLogs"
+      },
+      "customWidth": "50",
+      "name": "Allowed by source ip"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "//reference list posted here : https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/ipv4-lookup-plugin\r\nlet geoData = externaldata\r\n(network:string,geoname_id:string,continent_code:string,continent_name:string,\r\ncountry_iso_code:string,country_name:string,is_anonymous_proxy:string,is_satellite_provider:string)\r\n[@\"{GeoLocation}\"] with (ignoreFirstRecord=true, format=\"csv\");\r\nAZFWNetworkRule\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| where Action == \"Deny\"\r\n| evaluate ipv4_lookup (geoData, SourceIp,  network, true)\r\n| summarize  count (), last_log = datetime_diff(\"second\", now(), max(TimeGenerated)) by SourceIp, country_name\r\n| sort by count_ desc\r\n\r\n",
+        "size": 0,
+        "showAnalytics": true,
+        "title": "Denied by source IP: Query time({$queryTime}), total rows({$rowCount})",
+        "noDataMessage": "There are no Network Rule logs within the selected workspaces and for the selected firewalls. If you believe the selection is correct, confirm Application Rule logs are enabled for the Azure Firewall and feeding into this selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 2,
+        "timeContextFromParameter": "TimeRange",
+        "showRefreshButton": true,
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "count_",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "redBright"
+              },
+              "numberFormat": {
+                "unit": 17,
+                "options": {
+                  "style": "decimal",
+                  "useGrouping": false,
+                  "maximumSignificantDigits": 4
+                }
+              }
+            },
+            {
+              "columnMatch": "last_log",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "blackWhite"
+              },
+              "numberFormat": {
+                "unit": 24,
+                "options": {
+                  "style": "decimal"
+                }
+              }
+            }
+          ],
+          "rowLimit": 2000
+        },
+        "sortBy": []
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFNetworkRuleLogs"
+      },
+      "customWidth": "50",
+      "name": "query - 2 - Copy"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "//reference list posted here : https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/ipv4-lookup-plugin\r\nlet geoData = externaldata\r\n(network:string,geoname_id:string,continent_code:string,continent_name:string,\r\ncountry_iso_code:string,country_name:string,is_anonymous_proxy:string,is_satellite_provider:string)\r\n[@\"{GeoLocation}\"] with (ignoreFirstRecord=true, format=\"csv\");\r\nAZFWNetworkRule\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| evaluate ipv4_lookup (geoData, SourceIp,  network, true)\r\n| project TimeGenerated, Firewall=_ResourceId, Action, ActionReason, SourceIp, network, continent_name, country_name, is_anonymous_proxy, SourcePort, DestinationIp, DestinationPort, Protocol, Policy, RuleCollectionGroup, RuleCollection, Rule\r\n| order by TimeGenerated desc",
+        "size": 0,
+        "showAnalytics": true,
+        "title": "Network Rule events: Query Time({$queryTime}) : Total Rows({$rowCount})",
+        "noDataMessage": "There are no Network Rule events within the selected workspaces and for the selected firewalls. If you believe the selection is correct, confirm Network Rule logs are enabled for the Azure Firewall and feeding into this selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 2,
         "timeContextFromParameter": "TimeRange",
         "showRefreshButton": true,
         "showExportToExcel": true,
@@ -282,24 +920,435 @@
         "gridSettings": {
           "formatters": [
             {
-              "columnMatch": "ResourceId",
-              "formatter": 13,
+              "columnMatch": "Action",
+              "formatter": 18,
               "formatOptions": {
-                "linkTarget": "Resource",
-                "linkIsContextBlade": true,
-                "showIcon": true
+                "thresholdsOptions": "icons",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Allow",
+                    "representation": "success",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Deny",
+                    "representation": "disabled",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": "success",
+                    "text": "{0}{1}"
+                  }
+                ]
               }
             }
           ],
+          "rowLimit": 2000,
+          "filter": true,
+          "sortBy": [
+            {
+              "itemKey": "TimeGenerated",
+              "sortOrder": 2
+            }
+          ]
+        },
+        "sortBy": [
+          {
+            "itemKey": "TimeGenerated",
+            "sortOrder": 2
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFNetworkRuleLogs"
+      },
+      "name": "AFNetworkRuleLogs"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "---\r\n## Azure Firewall - Application rule log"
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFApplicationRuleLogs"
+      },
+      "name": "text - 14"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWApplicationRule\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| where RuleCollection matches regex \".*\" \r\n| summarize Count = count(), last_log = datetime_diff(\"second\", now(), max(TimeGenerated)) by RuleCollection, Rule, WebCategory",
+        "size": 1,
+        "title": "Application Rule Usage: Query Time ({$queryTime})",
+        "noDataMessage": "There are no Application Rule logs within the selected workspaces and the selected firewalls. If you believe the selection is correct, confirm Application Rule logs are enabled for the Azure Firewall and feeding into this selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 2,
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "Count",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "blueGreen"
+              },
+              "numberFormat": {
+                "unit": 17,
+                "options": {
+                  "style": "decimal",
+                  "useGrouping": false,
+                  "maximumSignificantDigits": 4
+                }
+              }
+            },
+            {
+              "columnMatch": "last_log",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "blackWhite"
+              },
+              "numberFormat": {
+                "unit": 24,
+                "options": {
+                  "style": "decimal",
+                  "useGrouping": false
+                }
+              }
+            }
+          ],
+          "sortBy": [
+            {
+              "itemKey": "$gen_heatmap_last_log_4",
+              "sortOrder": 1
+            }
+          ]
+        },
+        "sortBy": [
+          {
+            "itemKey": "$gen_heatmap_last_log_4",
+            "sortOrder": 1
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFApplicationRuleLogs"
+      },
+      "name": "query - 36"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWApplicationRule\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| where Action == \"Allow\"\r\n| summarize count (), last_log = datetime_diff(\"second\", now(), max(TimeGenerated)) by Fqdn\r\n| sort by count_ desc\r\n\r\n",
+        "size": 0,
+        "showAnalytics": true,
+        "title": "Allowed FQDN's by count: Query time({$queryTime}), total rows({$rowCount})",
+        "noDataMessage": "There are no Application Rule logs within the selected workspaces and the selected firewalls. If you believe the selection is correct, confirm Application Rule logs are enabled for the Azure Firewall and feeding into this selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 2,
+        "timeContextFromParameter": "TimeRange",
+        "showRefreshButton": true,
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "count_",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "blueGreen"
+              },
+              "numberFormat": {
+                "unit": 17,
+                "options": {
+                  "style": "decimal",
+                  "useGrouping": false,
+                  "maximumSignificantDigits": 4
+                }
+              }
+            },
+            {
+              "columnMatch": "last_log",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "blackWhite"
+              },
+              "numberFormat": {
+                "unit": 24,
+                "options": {
+                  "style": "decimal"
+                }
+              }
+            }
+          ],
+          "sortBy": [
+            {
+              "itemKey": "$gen_heatmap_count__1",
+              "sortOrder": 2
+            }
+          ]
+        },
+        "sortBy": [
+          {
+            "itemKey": "$gen_heatmap_count__1",
+            "sortOrder": 2
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFApplicationRuleLogs"
+      },
+      "customWidth": "50",
+      "name": "query - 2"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWApplicationRule\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| where Action == \"Deny\"\r\n| summarize count (), last_log = datetime_diff(\"second\", now(), max(TimeGenerated)) by Fqdn\r\n| sort by count_ desc",
+        "size": 0,
+        "showAnalytics": true,
+        "title": "Denied FQDN's by count: Query time({$queryTime}), total rows({$rowCount})",
+        "noDataMessage": "There are no Application Rule logs within the selected workspaces and the selected firewalls. If you believe the selection is correct, confirm Application Rule logs are enabled for the Azure Firewall and feeding into this selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 2,
+        "timeContextFromParameter": "TimeRange",
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "count_",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "redBright"
+              },
+              "numberFormat": {
+                "unit": 17,
+                "options": {
+                  "style": "decimal",
+                  "useGrouping": false,
+                  "maximumSignificantDigits": 4
+                }
+              }
+            },
+            {
+              "columnMatch": "last_log",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "blackWhite"
+              },
+              "numberFormat": {
+                "unit": 24,
+                "options": {
+                  "style": "decimal"
+                }
+              }
+            }
+          ],
+          "sortBy": [
+            {
+              "itemKey": "$gen_heatmap_count__1",
+              "sortOrder": 2
+            }
+          ]
+        },
+        "sortBy": [
+          {
+            "itemKey": "$gen_heatmap_count__1",
+            "sortOrder": 2
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFApplicationRuleLogs"
+      },
+      "customWidth": "50",
+      "name": "query - 7"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWApplicationRule\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| where isnotempty(WebCategory)\r\n| where Action == \"Allow\"\r\n| summarize count() by WebCategory\r\n| sort by count_ desc",
+        "size": 1,
+        "title": "Allowed Web Categories by count",
+        "noDataMessage": "There are no Application Rule logs within the selected workspaces and the selected firewalls. If you believe the selection is correct, confirm Application Rule logs are enabled for the Azure Firewall and feeding into this selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 2,
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "count_",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "whiteBlack"
+              },
+              "numberFormat": {
+                "unit": 17,
+                "options": {
+                  "style": "decimal",
+                  "useGrouping": false,
+                  "maximumSignificantDigits": 4
+                }
+              }
+            }
+          ]
+        },
+        "chartSettings": {
+          "showLegend": true
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFApplicationRuleLogs"
+      },
+      "customWidth": "50",
+      "name": "query - 5 - Copy - Copy"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWApplicationRule\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| where isnotempty(WebCategory)\r\n| where Action == \"Deny\"\r\n| summarize count() by WebCategory\r\n| sort by count_ desc",
+        "size": 1,
+        "showAnalytics": true,
+        "title": "Denied Web Catgories by count",
+        "noDataMessage": "There are no Application Rule logs within the selected workspaces and the selected firewalls. If you believe the selection is correct, confirm Application Rule logs are enabled for the Azure Firewall and feeding into this selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 2,
+        "timeContextFromParameter": "TimeRange",
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "count_",
+              "formatter": 8,
+              "formatOptions": {
+                "palette": "whiteBlack"
+              },
+              "numberFormat": {
+                "unit": 17,
+                "options": {
+                  "style": "decimal",
+                  "useGrouping": false,
+                  "maximumSignificantDigits": 4
+                }
+              }
+            }
+          ]
+        },
+        "sortBy": []
+      },
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFApplicationRuleLogs"
+      },
+      "customWidth": "50",
+      "name": "query - 2 - Copy"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWApplicationRule\r\n| parse _ResourceId with * \"azurefirewalls/\" Resource\r\n| where Resource in~ (split(\"{Resource:label}\", \", \"))\r\n| summarize by TimeGenerated, _ResourceId, Action, ActionReason, SourceIp, SourcePort, Fqdn, DestinationPort, Protocol, Policy, RuleCollectionGroup, RuleCollection, Rule, WebCategory\r\n| order by TimeGenerated desc",
+        "size": 0,
+        "showAnalytics": true,
+        "title": "Application Rule events: Query Time({$queryTime}) : Total Rows({$rowCount})",
+        "noDataMessage": "There are no Application Rule events within the selected workspaces and the selected firewalls. If you believe the selection is correct, confirm Application Rule logs are enabled for the Azure Firewall and feeding into this selected workspace. Reference Docs: https://docs.microsoft.com/en-us/azure/firewall/",
+        "noDataMessageStyle": 2,
+        "timeContextFromParameter": "TimeRange",
+        "showRefreshButton": true,
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspaces}"
+        ],
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "Action",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "icons",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Allow",
+                    "representation": "success",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Deny",
+                    "representation": "disabled",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": "success",
+                    "text": "{0}{1}"
+                  }
+                ]
+              }
+            }
+          ],
+          "rowLimit": 2000,
           "filter": true
         }
       },
-      "showPin": true,
-      "name": "query - 1"
+      "conditionalVisibility": {
+        "parameterName": "selectedTab",
+        "comparison": "isEqualTo",
+        "value": "AFApplicationRuleLogs"
+      },
+      "name": "query - 9"
     }
   ],
   "fallbackResourceIds": [
     "Azure Monitor"
   ],
+  "fromTemplateId": "sentinel-UserWorkbook",
   "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
 }
